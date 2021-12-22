@@ -120,3 +120,24 @@ mysql> select count(salary) from employee_payroll where gender = 'M' group by ge
 |             2 |
 +---------------+
 1 row in set (0.00 sec)
+
+mysql> ALTER TABLE employee_payroll ADD phone varchar(20) AFTER name,
+    ->  ADD address varchar(150) AFTER phone,
+    ->  ADD department varchar(30) NOT NULL AFTER address;
+Query OK, 0 rows affected (2.35 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe employee_payroll;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(30)  | NO   |     | NULL    |                |
+| phone      | varchar(20)  | YES  |     | NULL    |                |
+| address    | varchar(150) | YES  |     | NULL    |                |
+| department | varchar(30)  | NO   |     | NULL    |                |
+| gender     | char(1)      | YES  |     | NULL    |                |
+| salary     | double       | NO   |     | NULL    |                |
+| start_date | date         | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.08 sec)
