@@ -50,3 +50,12 @@ mysql> select * from employee_payroll;
 |  4 | preety |  30000 | 2021-06-11 |
 +----+--------+--------+------------+
 3 rows in set (0.05 sec)
+
+mysql> select salary from employee_payroll where start_date between cast('2021-04-04'as date) and date(now());
++--------+
+| salary |
++--------+
+|  20000 |
+|  30000 |
++--------+
+2 rows in set (0.12 sec)
