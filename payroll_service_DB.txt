@@ -190,3 +190,88 @@ mysql> select* from employee_payroll;
 |  5 | terisa | 78787878787 | mumbai   | HR         | F      |     20000 |       2000 |        1000 | 200 |   18000 | 2020-10-22 |
 +----+--------+-------------+----------+------------+--------+-----------+------------+-------------+-----+---------+------------+
 4 rows in set (0.00 sec)
+
+mysql>  create table Employee(
+    -> emp_id varchar(10) not null primary key,
+    ->  name varchar(30) not null,
+    ->  phone_number varchar(20) not null,
+    -> gender char(1),
+    -> start date,
+    -> company_id int unsigned,
+    -> index (company_id));
+Query OK, 0 rows affected (5.63 sec)
+
+mysql> describe employee;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| emp_id       | varchar(10)  | NO   | PRI | NULL    |       |
+| name         | varchar(30)  | NO   |     | NULL    |       |
+| phone_number | varchar(20)  | NO   |     | NULL    |       |
+| gender       | char(1)      | YES  |     | NULL    |       |
+| start        | date         | YES  |     | NULL    |       |
+| company_id   | int unsigned | YES  | MUL | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+6 rows in set (0.25 sec)
+
+mysql> create table company(
+    ->  company_id int unsigned auto_increment primary key,
+    ->  company_name varchar(50));
+Query OK, 0 rows affected (0.72 sec)
+
+mysql> describe company;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| company_id   | int unsigned | NO   | PRI | NULL    | auto_increment |
+| company_name | varchar(50)  | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.15 sec)
+
+mysql>  create table payroll(
+    ->  emp_id varchar(10) primary key,
+    ->  basic_pay double,
+    -> deductions double,
+    ->  taxable_pay double,
+    -> tax double,
+    -> net_pay double);
+Query OK, 0 rows affected (0.71 sec)
+
+mysql> describe payroll;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_id      | varchar(10) | NO   | PRI | NULL    |       |
+| basic_pay   | double      | YES  |     | NULL    |       |
+| deductions  | double      | YES  |     | NULL    |       |
+| taxable_pay | double      | YES  |     | NULL    |       |
+| tax         | double      | YES  |     | NULL    |       |
+| net_pay     | double      | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.17 sec)
+
+mysql> create table department(
+    -> dept_id varchar(10) not null,
+    -> dept_name varchar(50) not null);
+Query OK, 0 rows affected (0.53 sec)
+
+mysql> describe department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_id   | varchar(10) | NO   |     | NULL    |       |
+| dept_name | varchar(50) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.09 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_payroll_service |
++---------------------------+
+| company                   |
+| department                |
+| employee                  |
+| employee_payroll          |
+| payroll                   |
++---------------------------+
+5 rows in set (0.06 sec)
