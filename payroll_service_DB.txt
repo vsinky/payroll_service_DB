@@ -171,3 +171,22 @@ mysql> describe employee_payroll;
 | start_date  | date         | YES  |     | NULL    |                |
 +-------------+--------------+------+-----+---------+----------------+
 12 rows in set (0.14 sec)
+
+mysql> update employee_payroll set address = 'hilsa' where name = 'preety';
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  insert into employee_payroll(name,phone,address,department,gender,basic_pay,deductions,taxable_pay,tax,net_pay,start_date)
+    -> values('terisa','78787878787','mumbai','HR','F','20000','2000','1000','200','18000','2020-10-22');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select* from employee_payroll;
++----+--------+-------------+----------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+| id | name   | phone       | address  | department | gender | basic_pay | deductions | taxable_pay | tax | net_pay | start_date |
++----+--------+-------------+----------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+|  2 | sandy  | 7777777777  | ludhiana | ece        | M      |     10000 |          0 |           0 |   0 |       0 | 2021-02-07 |
+|  3 | sonu   | 9777777457  | delhi    | cse        | M      |     20000 |          0 |           0 |   0 |       0 | 2021-04-04 |
+|  4 | preety | 9077777450  | hilsa    | civil      | F      |     30000 |          0 |           0 |   0 |       0 | 2021-06-11 |
+|  5 | terisa | 78787878787 | mumbai   | HR         | F      |     20000 |       2000 |        1000 | 200 |   18000 | 2020-10-22 |
++----+--------+-------------+----------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+4 rows in set (0.00 sec)
