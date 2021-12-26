@@ -275,3 +275,105 @@ mysql> show tables;
 | payroll                   |
 +---------------------------+
 5 rows in set (0.06 sec)
+
+mysql> insert into employee values('emp1','sinky',7894561232','F','2020-02-01');
+mysql>  insert into employee values('emp2','sandy','7018485580','M','2021-02-07','2');
+Query OK, 1 row affected (0.12 sec)
+
+mysql>  insert into employee values('emp3','sonu','7018485685','M','2021-04-04','3');
+Query OK, 1 row affected (0.12 sec)
+
+mysql>  insert into employee values('emp4','preety','7018485633','F','2021-06-11','4');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from employee;
++--------+--------+--------------+--------+------------+------------+
+| emp_id | name   | phone_number | gender | start      | company_id |
++--------+--------+--------------+--------+------------+------------+
+| emp1   | sinky  | 7777555599   | F      | 2020-03-01 |          1 |
+| emp2   | sandy  | 7018485580   | M      | 2021-02-07 |          2 |
+| emp3   | sonu   | 7018485685   | M      | 2021-04-04 |          3 |
+| emp4   | preety | 7018485633   | F      | 2021-06-11 |          4 |
++--------+--------+--------------+--------+------------+------------+
+4 rows in set (0.11 sec)
+
+mysql> insert into company(company_name) values('Apple'),('Dell'),('HP'),('Realme');
+Query OK, 4 rows affected (0.40 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from company;
++------------+--------------+
+| company_id | company_name |
++------------+--------------+
+|          1 | Apple        |
+|          2 | Dell         |
+|          3 | HP           |
+|          4 | Realme       |
++------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from company inner join employee where company.company_id=employee.company_id;
++------------+--------------+--------+--------+--------------+--------+------------+------------+
+| company_id | company_name | emp_id | name   | phone_number | gender | start      | company_id |
++------------+--------------+--------+--------+--------------+--------+------------+------------+
+|          1 | Apple        | emp1   | sinky  | 7777555599   | F      | 2020-03-01 |          1 |
+|          2 | Dell         | emp2   | sandy  | 7018485580   | M      | 2021-02-07 |          2 |
+|          3 | HP           | emp3   | sonu   | 7018485685   | M      | 2021-04-04 |          3 |
+|          4 | Realme       | emp4   | preety | 7018485633   | F      | 2021-06-11 |          4 |
++------------+--------------+--------+--------+--------------+--------+------------+------------+
+4 rows in set (0.05 sec)
+
+mysql> alter table employee add foreign key(company_id) references company (company_id);
+Query OK, 4 rows affected (4.13 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> describe payroll;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_id      | varchar(10) | NO   | PRI | NULL    |       |
+| basic_pay   | double      | YES  |     | NULL    |       |
+| deductions  | double      | YES  |     | NULL    |       |
+| taxable_pay | double      | YES  |     | NULL    |       |
+| tax         | double      | YES  |     | NULL    |       |
+| net_pay     | double      | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.06 sec)
+
+mysql> alter table payroll add foreign key(emp_id) references employee(emp_id);
+Query OK, 0 rows affected (2.31 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table department add primary key(dept_id);
+Query OK, 0 rows affected (2.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_id   | varchar(10) | NO   | PRI | NULL    |       |
+| dept_name | varchar(50) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table employee add dept_id varchar(10) ;
+Query OK, 0 rows affected (0.83 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee add foreign key (dept_id) references department(dept_id);
+Query OK, 4 rows affected (2.57 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql>  insert into department(dept_id, dept_name) values ('civil','civil engineer') ;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from department;
++---------+---------------------+
+| dept_id | dept_name           |
++---------+---------------------+
+| civil   | civil engineer      |
+| cse     | computer science    |
+| eee     | electrical engineer |
++---------+---------------------+
+3 rows in set (0.00 sec)
